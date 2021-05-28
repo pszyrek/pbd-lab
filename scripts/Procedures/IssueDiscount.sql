@@ -1,0 +1,9 @@
+USE PBD_lab
+GO
+CREATE PROCEDURE IssueDiscount
+	@CustomerId AS bigint
+AS
+BEGIN
+	INSERT INTO Discounts VALUES
+	(@CustomerId, 0.05, GETDATE(), DATEADD(WEEK, 1, GETDATE()))
+END
