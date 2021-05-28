@@ -1,15 +1,18 @@
 import pyodbc
-from GenerateData import *
+from DataObjects import *
+from DataGeneration import *
 
 
 def main():
-    connection = pyodbc.connect(
-        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-1;DATABASE=PBD_lab;UID=test;PWD=test')
-    cursor = connection.cursor()
-    varA = 1
-    cursor.execute("INSERT INTO Users (UserID, Login, Name, RoleID) VALUES (?, ?, ?, ?)", varA, 'test', 'Jan', 2)
-    connection.commit()
-    print('Rows inserted: ' + str(connection))
+    size = 50
+    # generate_companies(size)
+    # generate_customers(size)
+    # generate_tables(size)
+    # generate_reservations(size)
+    # generate_discounts(size)
+    generate_products(size)
+    # generate_orders(size)
+    # generate_order_entries(size)
 
 
 if __name__ == "__main__":
