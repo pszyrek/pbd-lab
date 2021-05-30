@@ -22,9 +22,12 @@ def main():
     # generate_products(productsSize)
     # generate_orders(ordersSize, customersSize, discountsSize)
     # generate_order_entries(orderEntriesSize, productsSize)
+    # insert_roles()
+    # insert_users()
+    # insert_functionalities()
 
     # test_insert()
-    test_select()
+    # test_select()
 
 
 

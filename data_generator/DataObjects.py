@@ -9,6 +9,9 @@ TableID = []
 OrderID = []
 ProductID = []
 DiscountID = []
+RoleID = [1, 2, 3, 4]
+UserID = []
+FunctionalityID = []
 
 # Customer table
 CustomerName = []
@@ -52,6 +55,19 @@ ProductName = []
 ProductTotalPrice = []
 ProductIsInMenu = []
 ProductIsPreordered = []
+
+# Roles table
+RoleName = ["Administrator", "Manager", "Employee", "Guest"]
+
+# Permissions table
+# TODO insert functionalities names
+FunctionalitiesName = ["Functionality1", "Functionality2", "Functionality3", "Functionality4"]
+FunctionalitiesToRoles = [1, 2, 3, 4]
+
+# Users table
+UserLogin = ["tomek123", "ania33", "droid1", "kociara00", "nowy18", "gracz3", "guest"]
+UserName = ["Tomasz Kowalski", "Anna Nowak", "Bartosz Bąk", "Maria Dąbrowska", "Jan Wesołowski", "Marcel Słowacki", "Gość"]
+UserRoles = [1, 2, 3, 3, 3, 3, 4]
 
 faker = Faker()
 Faker.seed(1)
@@ -213,3 +229,4 @@ def generateDiscountPercentage(size):
     for i in range(0, size - 1):
         x = round(random.uniform(0.1, 0.99), 2)
         DiscountPercentage.append(x)
+

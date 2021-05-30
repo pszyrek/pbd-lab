@@ -137,3 +137,28 @@ def test_select():
     cursor.execute("SELECT DiscountID, CustomerID FROM Discounts")
     for row in cursor.fetchall():
         print(row)
+
+
+def insert_roles():
+    for i in range(4):
+        cursor.execute("INSERT INTO Roles (RoleID, Name) VALUES (?, ?)", RoleID[i], RoleName[i])
+        connection.commit()
+        print("Rows inserted: " + str(connection))
+
+
+def insert_users():
+    generateID(UserID, 7)
+    for i in range(7):
+        cursor.execute("INSERT INTO Users (UserID, Login, Name, RoleID) VALUES (?, ?, ?, ?)",
+                       UserID[i], UserLogin[i], UserName[i], UserRoles[i])
+        connection.commit()
+        print("Rows inserted: " + str(connection))
+
+
+def insert_functionalities():
+    generateID(FunctionalityID, 4)
+    for i in range(4):
+        cursor.execute("INSERT INTO Permissions (FunctionalityID, FunctionalityName, RoleID) VALUES (?, ?, ?)",
+                       FunctionalityID[i], FunctionalitiesName[i], FunctionalitiesToRoles[i])
+        connection.commit()
+        print("Rows inserted: " + str(connection))
