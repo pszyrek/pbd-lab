@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<DatabaseNoteTakerProject>
+	<Project>
+		<Setting key="saveConnectionSettingsSeparately" value="False" />
+		<Setting key="saveOneFilePerObject" value="False" />
+		<Setting key="saveObjectHistory" value="True" />
+		<Setting key="publishPath" value="" />
+		<Setting key="publishXSLPath" value="" />
+		<Setting key="includeFilter"></Setting>
+		<Setting key="excludeFilter"></Setting>
+	</Project>
+	<Connection Type="Microsoft SQL Server">
+		<AuthType>windows</AuthType>
+		<Database>PBD_lab</Database>
+		<Password />
+		<Server>DESKTOP-1</Server>
+		<StorePassword>false</StorePassword>
+		<User></User>
+	</Connection>
+	<Model Name="PBD_lab">
+		<Group Type="Table">
+			<Object Name="dbo.Companies" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Companies przechowuje informację dotyczące firm, których pracownicy są klientami resturacji.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:38:39" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Adress" null="not null" sortOrder="3" type="varchar(255)">
+						<Comment>Adres firmy</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:38:39" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CompanyID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator firmy</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:38:39" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(255)">
+						<Comment>Nazwa firmy</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:38:39" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TaxID" null="not null" sortOrder="4" type="varchar(50)">
+						<Comment>Numer NIP firmy</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 4 attributes" />
+					<Record When="2021-05-30T21:38:39" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Adress comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="CompanyID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Name comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="TaxID comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Customers" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Customers przechowuje informacje dotyczące klientów restauracji.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:41:17" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CompanyID" null="null" sortOrder="2" type="bigint">
+						<Comment>Identyfikator firmy, w której pracuje klient. W przypadku kiedy wartość tego pola jest równa NULL, mamy do czynienia z klientem indywidualnym.</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:41:17" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CustomerID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator klienta</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:41:17" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="EmailAdress" null="not null" sortOrder="5" type="varchar(255)">
+						<Comment>Adress email klienta</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:41:17" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="3" type="varchar(50)">
+						<Comment>Imię klienta</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:41:17" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="PhoneNumber" null="not null" sortOrder="6" type="varchar(50)">
+						<Comment>Numer telefonu klienta</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:41:17" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Surname" null="not null" sortOrder="4" type="varchar(50)">
+						<Comment>Nazwisko klienta</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 6 attributes" />
+					<Record When="2021-05-30T21:41:17" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="CompanyID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="CustomerID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="EmailAdress comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Name comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="PhoneNumber comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Surname comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Discounts" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Discounts przechowuje informacje dotyczące rabatów przyznawanych klientom.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:42:53" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CustomerID" null="not null" sortOrder="2" type="bigint">
+						<Comment>Identyfikator klienta, któremu został przyznany rabat</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:42:53" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Indetyfikator rabatu</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:42:53" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountPercentage" null="not null" sortOrder="3" type="decimal">
+						<Comment>Wysokość rabatu przedstawiona w postaci liczby dziesiętnej</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:54:12" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ExpirationDateTime" null="not null" sortOrder="5" type="datetime">
+						<Comment>Data i godzina ważności rabatu</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:54:12" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="IssuanceDateTime" null="not null" sortOrder="4" type="datetime">
+						<Comment>Data i godzina wydania rabatu</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 5 attributes" />
+					<Record When="2021-05-30T21:42:53" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="CustomerID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="DiscountID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="DiscountPercentage comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="ExpirationDateTime comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="IssuanceDateTime comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.OrderEntries" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela OrderEntries przechowuje informacje dotyczące poszczególnych pozycji znajdujących się w zamówieniu</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:45:45" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="OrderID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator zamówienia, którego częścią jest OrderEntry</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:44:38" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" pk="true" sortOrder="2" type="bigint">
+						<Comment>Identyfikator produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:44:38" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Quantity" null="not null" sortOrder="3" type="bigint">
+						<Comment>Ilość produktu</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+					<Record When="2021-05-30T21:44:38" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="OrderID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="ProductID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Quantity comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Orders" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Orders przechwouje informacje dotyczące zamówień składanych w restauracji</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:47:26" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CustomerID" null="not null" sortOrder="2" type="bigint">
+						<Comment>Indentyfikator klienta, który złożył zamówienie</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:47:26" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountID" null="null" sortOrder="6" type="bigint">
+						<Comment>Identyfikator rabatu, w przypadku kiedy jego wartość jest równa NULL, żaden rabat nie został wykorzystany podczas składania tego zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:45:17" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="OrderID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:47:26" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="PlacementDateTime" null="not null" sortOrder="3" type="datetime">
+						<Comment>Data złożenia zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:47:26" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="RealizationDateTime" null="not null" sortOrder="4" type="datetime">
+						<Comment>Data realizacji zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:47:26" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="WasInvoiced" null="not null" sortOrder="5" type="bit">
+						<Comment>Wartość typu boolean wskazująca czy zamówianie zostało już uwzględnione na fakturze</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 6 attributes" />
+					<Record When="2021-05-30T21:45:17" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="CustomerID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="DiscountID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="OrderID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="PlacementDateTime comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="RealizationDateTime comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="WasInvoiced comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Permissions" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Permissions jest częścią modułu odpowiedzialnego za uprawnienia do korzystania z systemu. Przechowuje informacje dotyczące minimalnej wymaganej roli jaką musi posiadać użytkownik, aby móc wykonać daną funkcjonalność.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:49:56" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="FunctionalityID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator funkcjonalności</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:49:56" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="FunctionalityName" null="not null" sortOrder="2" type="varchar(50)">
+						<Comment>Nazwa funkcjonalności</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:49:56" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="RoleID" null="not null" sortOrder="3" type="bigint">
+						<Comment>Minimalna wartość indetyfikatora roli, która pozwala na wykonanie danej funkcjonalności</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+					<Record When="2021-05-30T21:49:56" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="FunctionalityID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="FunctionalityName comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="RoleID comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Products" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Products przechowuje informacje dotyczące pozycji znajdujących się w ofercie restauracji.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:52:13" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="IsInMenu" null="not null" sortOrder="4" type="bit">
+						<Comment>Wartość typu boolean, wskazująca czy dany produkt jest aktualnie dostępny w ofercie restauracji</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:52:13" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="IsPreordered" null="not null" sortOrder="5" type="bit">
+						<Comment>Wartość typu boolean, wskazująca czy dany produkt musi być zamówiony z wyprzedzeniem, w określonych dniach tygodnia</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:51:00" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)">
+						<Comment>Nazwa produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:51:00" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:51:00" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalPrice" null="not null" sortOrder="3" type="decimal">
+						<Comment>Całkowita cena produktu</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 5 attributes" />
+					<Record When="2021-05-30T21:51:00" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="IsInMenu comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="IsPreordered comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Name comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="ProductID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="TotalPrice comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Reservations" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Reservations przechowuje informacje dotyczące rezerwacji składanych przez klientów restauracji.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:53:56" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CustomerID" null="not null" sortOrder="2" type="bigint">
+						<Comment>Identyfikator klienta składającego rezerwację</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:55:08" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="IsAccepted" null="not null" sortOrder="8" type="bit">
+						<Comment>Wartość typu boolean, wskazująca czy rezerwacja została zaakceptowana przez pracownika restauracji</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:55:08" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="IsBusinessMeeting" null="not null" sortOrder="7" type="bit">
+						<Comment>Wartość typu boolean, wskazująca czy rezerwacja została wykonana na firmę</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:53:56" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="PlacementDateTime" null="not null" sortOrder="4" type="datetime">
+						<Comment>Data i godzina złożenia rezerwacji</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:54:34" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ReservationEndDateTime" null="not null" sortOrder="6" type="datetime">
+						<Comment>Data i godzina zakończenia rezerwacji</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:53:56" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ReservationID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator rezerwacji</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:54:34" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ReservationStartDateTime" null="not null" sortOrder="5" type="datetime">
+						<Comment>Data i godzina rozpoczęcia rezerwacji</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:53:56" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TableID" null="not null" sortOrder="3" type="bigint">
+						<Comment>Identyfikator stolika, który został zarezerwowany</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 8 attributes" />
+					<Record When="2021-05-30T21:53:56" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="CustomerID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="IsAccepted comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="IsBusinessMeeting comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="PlacementDateTime comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="ReservationEndDateTime comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="ReservationID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="ReservationStartDateTime comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="TableID comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Roles" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabel Roles jest częścią modułu odpowiedzialnego za uprawnienia do korzystania z systemu. Zawiera wszystkie role występujące w systemie.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:56:00" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)">
+						<Comment>Nazwa roli</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:56:00" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="RoleID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator roli</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 2 attributes" />
+					<Record When="2021-05-30T21:57:32" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Name comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="RoleID comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Tables" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Tables przechowuje informacje dotyczące dostępności stolików znajdujących sie w restauracji</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:57:07" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="IsActive" null="not null" sortOrder="2" type="bit">
+						<Comment>Wartość typu boolean, wskazująca czy dany stolik jest dostępny</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:57:07" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TableID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator stolika</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 2 attributes" />
+					<Record When="2021-05-30T21:57:07" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="IsActive comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="TableID comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.Users" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Tabela Users jest częścią modułu odpowiedzialnego za uprawnienia do korzystania z systemu. Zawiera informacje dotyczące wszystkich użytkowników zdefiniowanych w systemie.</Comment>
+				<Attributes>
+					<Attribute commentModified="30.05.2021 21:58:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Login" null="not null" sortOrder="2" type="varchar(50)">
+						<Comment>Login użytkownika</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:58:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="3" type="varchar(50)">
+						<Comment>Nazwa użytkownika</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:58:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="RoleID" null="not null" sortOrder="4" type="bigint">
+						<Comment>Indetyfikator roli przypisanej do użytkownika</Comment>
+					</Attribute>
+					<Attribute commentModified="30.05.2021 21:58:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="UserID" null="not null" pk="true" sortOrder="1" type="bigint">
+						<Comment>Identyfikator użytkownika</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 4 attributes" />
+					<Record When="2021-05-30T21:58:43" Who="Jan" Description="Changed object comment" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Login comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="Name comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="RoleID comment changed" />
+					<Record When="2021-05-30T21:58:46" Who="Jan" Description="UserID comment changed" />
+				</History>
+			</Object>
+		</Group>
+		<Group Type="Function">
+			<Object Name="dbo.apply_discount" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes>
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="decimal" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@discount_percentage" sortOrder="2" type="decimal" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@original_price" sortOrder="1" type="decimal" />
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+				</History>
+			</Object>
+			<Object Name="dbo.calculate_net_price" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes>
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="decimal" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@gross_price" sortOrder="1" type="decimal" />
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 2 attributes" />
+				</History>
+			</Object>
+			<Object Name="dbo.can_preorder" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes>
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="bit" />
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 1 attributes" />
+				</History>
+			</Object>
+		</Group>
+		<Group Type="View">
+			<Object Name="dbo.ActiveDiscounts" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes>
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CustomerID" null="not null" sortOrder="2" type="bigint" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountID" null="not null" sortOrder="1" type="bigint" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountPercentage" null="not null" sortOrder="3" type="decimal" />
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+				</History>
+			</Object>
+			<Object Name="dbo.ActiveMenu" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes>
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="1" type="bigint" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalPrice" null="not null" sortOrder="3" type="decimal" />
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+				</History>
+			</Object>
+			<Object Name="dbo.OrderEntrySummaries" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes>
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="OrderID" null="not null" sortOrder="1" type="bigint" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="2" type="bigint" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Quantity" null="null" sortOrder="3" type="bigint" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalGross" null="null" sortOrder="4" type="decimal" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalNet" null="null" sortOrder="5" type="decimal" />
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 5 attributes" />
+				</History>
+			</Object>
+			<Object Name="dbo.TaxedProducts" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes>
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="GrossPrice" null="not null" sortOrder="3" type="decimal" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="NetPrice" null="null" sortOrder="4" type="decimal" />
+					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="1" type="bigint" />
+				</Attributes>
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 4 attributes" />
+				</History>
+			</Object>
+		</Group>
+		<Group Type="Schema">
+			<Object Name="db_owner" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes />
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+				</History>
+			</Object>
+			<Object Name="dbo" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Attributes />
+				<History>
+					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
+				</History>
+			</Object>
+		</Group>
+	</Model>
+</DatabaseNoteTakerProject>
