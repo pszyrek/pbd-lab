@@ -70,11 +70,31 @@ def generateIDwithNull(list, size):
     distribution = [.65, .35]
     for i in range(1, size):
         random_number = random.choices(values, distribution)
-        if random_number == 1:
+        if random_number == [1]:
             list.append(null)
         else:
             list.append(i)
 
+
+def generateIDwithDiffrentListSize(list, sizeA, sizeB):
+    list.clear()
+    for i in range(1, sizeA):
+        x = random.randrange(1, sizeB)
+        list.append(x)
+
+
+def generateIDwithNullAndDiffrentListSize(list, sizeA, sizeB):
+    list.clear()
+    null = None
+    values = [1, 2]
+    distribution = [.65, .35]
+    for i in range(1, sizeA):
+        random_number = random.choices(values, distribution)
+        x = random.randrange(1, sizeB)
+        if random_number == [1]:
+            list.append(null)
+        else:
+            list.append(x)
 
 def generateCustomerName(size):
     CustomerName.clear()
@@ -191,5 +211,5 @@ def generateQuantity(size):
 
 def generateDiscountPercentage(size):
     for i in range(0, size - 1):
-        x = round(random.uniform(0, 1), 2)
+        x = round(random.uniform(0.1, 0.99), 2)
         DiscountPercentage.append(x)

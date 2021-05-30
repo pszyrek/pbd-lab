@@ -20,15 +20,16 @@ def generate_companies(size):
         print("Rows inserted: " + str(connection))
 
 
-def generate_customers(size):
-    generateID(CustomerID, size)
-    generateIDwithNull(CompanyID, size)
-    generateCustomerName(size)
-    generateCustomerSurname(size)
-    generateCustomerEmail(size)
-    generateCustomerPhoneNumber(size)
+# sizeA - size of customers list, sizeB - size of companies list
+def generate_customers(sizeA, sizeB):
+    generateID(CustomerID, sizeA)
+    generateIDwithNullAndDiffrentListSize(CompanyID, sizeA, sizeB)
+    generateCustomerName(sizeA)
+    generateCustomerSurname(sizeA)
+    generateCustomerEmail(sizeA)
+    generateCustomerPhoneNumber(sizeA)
 
-    for i in range(0, size - 1):
+    for i in range(0, sizeA - 1):
         cursor.execute("INSERT INTO Customers (CustomerID, CompanyID, Name, Surname, EmailAdress, PhoneNumber)"
                        "VALUES (?, ?, ?, ?, ?, ?)", CustomerID[i], CompanyID[i], CustomerName[i], CustomerSurname[i],
                        CustomerEmail[i], CustomerPhoneNumber[i])
@@ -46,15 +47,16 @@ def generate_tables(size):
         print("Rows inserted: " + str(connection))
 
 
-def generate_reservations(size):
-    generateID(ReservationID, size)
-    generateID(CustomerID, size)
-    generateIDwithNull(TableID, size)
-    generateDatesForReservations(2018, 1, 1, size)
-    generateBoolean(size, IsBusinessMeeting, 30)
-    generateBoolean(size, IsAccepted, 99)
+# sizeA - size of reservations list, sizeB - size of customers list, sizeC - size of tables list
+def generate_reservations(sizeA, sizeB, sizeC):
+    generateID(ReservationID, sizeA)
+    generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
+    generateIDwithDiffrentListSize(TableID, sizeA, sizeC)
+    generateDatesForReservations(2018, 1, 1, sizeA)
+    generateBoolean(sizeA, IsBusinessMeeting, 30)
+    generateBoolean(sizeA, IsAccepted, 99)
 
-    for i in range(0, size - 1):
+    for i in range(0, sizeA - 1):
         cursor.execute("INSERT INTO Reservations (ReservationID, CustomerID, TableID, PlacementDateTime, "
                        "ReservationStartDateTime, ReservationEndDateTime, IsBusinessMeeting, IsAccepted) VALUES"
                        "(?, ?, ?, ?, ?, ?, ?, ?)", ReservationID[i], CustomerID[i], TableID[i],
@@ -64,14 +66,16 @@ def generate_reservations(size):
         print("Rows inserted: " + str(connection))
 
 
-def generate_orders(size):
-    generateID(OrderID, size)
-    generateID(CustomerID, size)
-    generateDatesForOrders(2018, 1, 1, size)
-    generateBoolean(size, WasInvoiced, 35)
-    generateIDwithNull(DiscountID, size)
+# TODO we should bind users with their discounts in order to assign correct discounts to users
+# sizeA - size of orders list, sizeB - size of customers list, sizeC - size of discounts list
+def generate_orders(sizeA, sizeB, sizeC):
+    generateID(OrderID, sizeA)
+    generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
+    generateDatesForOrders(2018, 1, 1, sizeA)
+    generateBoolean(sizeA, WasInvoiced, 35)
+    generateIDwithNullAndDiffrentListSize(DiscountID, sizeA, sizeC)
 
-    for i in range(0, size - 1):
+    for i in range(0, sizeA - 1):
         cursor.execute("INSERT INTO Orders (OrderID, CustomerID, PlacementDateTime, RealizationDateTime,"
                        "WasInvoiced, DiscountID) VALUES (?, ?, ?, ?, ?, ?)", OrderID[i], CustomerID[i],
                        OrderPlacementDateTime[i], OrderRealizationDateTime[i], WasInvoiced[i], DiscountID[i])
@@ -79,12 +83,13 @@ def generate_orders(size):
         print("Rows inserted: " + str(connection))
 
 
-def generate_order_entries(size):
-    generateID(OrderID, size)
-    generateID(ProductID, size)
-    generateQuantity(size)
+# sizeA - size of order entries list, sizeB - size of products list
+def generate_order_entries(sizeA, sizeB):
+    generateID(OrderID, sizeA)
+    generateIDwithDiffrentListSize(ProductID, sizeA, sizeB)
+    generateQuantity(sizeA)
 
-    for i in range(0, size - 1):
+    for i in range(0, sizeA - 1):
         cursor.execute("INSERT INTO OrderEntries (OrderID, ProductID, Quantity) VALUES (?, ?, ?)", OrderID[i],
                        ProductID[i], ProductQuantity[i])
         connection.commit()
@@ -106,16 +111,29 @@ def generate_products(size):
         print("Rows inserted: " + str(connection))
 
 
-def generate_discounts(size):
-    generateID(DiscountID, 50)
-    generateID(CustomerID, 50)
-    generateDiscountPercentage(size)
-    generateDatesForDiscounts(2018, 1, 1, 50, 10)
+# sizeA - size of discounts list size, sizeB - size of customers list size
+def generate_discounts(sizeA, sizeB, numberOfDays):
+    generateID(DiscountID, sizeA)
+    generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
+    generateDiscountPercentage(sizeA)
+    generateDatesForDiscounts(2018, 1, 1, sizeA, numberOfDays)
 
-    for i in range(0, size - 1):
+    for i in range(0, sizeA - 1):
         cursor.execute("INSERT INTO Discounts (DiscountID, CustomerID, DiscountPercentage, IssuanceDateTime, "
                        "ExpirationDateTime) VALUES (?, ?, ?, ?, ?)", DiscountID[i], CustomerID[i],
-                       DiscountPercentage[i],
-                       DiscountIssuanceDateTime[i], DiscountExpirationDateTime[i])
+                       DiscountPercentage[i], DiscountIssuanceDateTime[i], DiscountExpirationDateTime[i])
         connection.commit()
         print("Rows inserted: " + str(connection))
+
+
+def test_insert():
+    cursor.execute("INSERT INTO Customers (CustomerID, CompanyID, Name, Surname, EmailAdress, PhoneNumber)"
+                   "VALUES (?, ?, ?, ?, ?, ?)", 1, None, "Name", "Surname", "Mail", "PhoneNumber")
+    connection.commit()
+    print("Rows inserted: " + str(connection))
+
+
+def test_select():
+    cursor.execute("SELECT DiscountID, CustomerID FROM Discounts")
+    for row in cursor.fetchall():
+        print(row)

@@ -4,15 +4,29 @@ from DataGeneration import *
 
 
 def main():
-    size = 50
-    # generate_companies(size)
-    # generate_customers(size)
-    # generate_tables(size)
-    # generate_reservations(size)
-    # generate_discounts(size)
-    generate_products(size)
-    # generate_orders(size)
-    # generate_order_entries(size)
+    customersSize = 500
+    companiesSize = 150
+    tablesSize = 50
+    reservationsSize = 1000
+    discountsSize = 750
+    discountValidDays = 10
+    productsSize = 100
+    ordersSize = 2000
+    orderEntriesSize = 3000
+
+    # generate_companies(companiesSize)
+    # generate_customers(customersSize, companiesSize)
+    # generate_tables(tablesSize)
+    # generate_reservations(reservationsSize, customersSize, tablesSize)
+    # generate_discounts(discountsSize, customersSize, discountValidDays)
+    # generate_products(productsSize)
+    # generate_orders(ordersSize, customersSize, discountsSize)
+    # generate_order_entries(orderEntriesSize, productsSize)
+
+    # test_insert()
+    test_select()
+
+
 
 
 if __name__ == "__main__":
