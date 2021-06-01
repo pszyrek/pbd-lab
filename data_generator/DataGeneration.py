@@ -2,8 +2,7 @@ import pyodbc
 
 from DataObjects import *
 
-connection = pyodbc.connect(
-    'DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-1;DATABASE=PBD_lab;UID=test;PWD=test')
+connection = pyodbc.connect(driver='{SQL Server}', server='(local)', database='PBD_lab', trusted_connection='yes')
 cursor = connection.cursor()
 
 

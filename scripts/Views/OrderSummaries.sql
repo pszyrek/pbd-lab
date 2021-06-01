@@ -11,8 +11,9 @@ SUM(TotalGross) AS AbsoluteGross,
 SUM(TotalNet) AS AbsoluteNet,
 discounts.DiscountPercentage AS DiscountPercentage,
 dbo.apply_discount(SUM(TotalGross), DiscountPercentage) AS TotalGross,
-dbo.apply_discount(SUM(TotalNet), DiscountPercentage) AS TotalNet
+dbo.apply_discount(SUM(TotalNet), DiscountPercentage) AS TotalNet,
+orders.WasInvoiced
 FROM Orders orders
 LEFT JOIN OrderEntrySummaries entries ON orders.OrderID = entries.OrderID
 LEFT JOIN Discounts discounts ON orders.DiscountID = discounts.DiscountID
-GROUP BY orders.OrderID, orders.CustomerID, orders.PlacementDateTime, orders.RealizationDateTime, discounts.DiscountPercentage
+GROUP BY orders.OrderID, orders.CustomerID, orders.PlacementDateTime, orders.RealizationDateTime, discounts.DiscountPercentage, orders.WasInvoiced
