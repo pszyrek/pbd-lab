@@ -49,7 +49,7 @@ def generate_tables(size):
 
 # sizeA - size of reservations list, sizeB - size of customers list, sizeC - size of tables list
 def generate_reservations(sizeA, sizeB, sizeC):
-    generateID(ReservationID, sizeA)
+    # generateID(ReservationID, sizeA)
     generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
     generateIDwithDiffrentListSize(TableID, sizeA, sizeC)
     generateDatesForReservations(2018, 1, 1, sizeA)
@@ -57,9 +57,9 @@ def generate_reservations(sizeA, sizeB, sizeC):
     generateBoolean(sizeA, IsAccepted, 99)
 
     for i in range(0, sizeA - 1):
-        cursor.execute("INSERT INTO Reservations (ReservationID, CustomerID, TableID, PlacementDateTime, "
+        cursor.execute("INSERT INTO Reservations (CustomerID, TableID, PlacementDateTime, "
                        "ReservationStartDateTime, ReservationEndDateTime, IsBusinessMeeting, IsAccepted) VALUES"
-                       "(?, ?, ?, ?, ?, ?, ?, ?)", ReservationID[i], CustomerID[i], TableID[i],
+                       "(?, ?, ?, ?, ?, ?, ?)",CustomerID[i], TableID[i],
                        ReservationDatePlacement[i], ReservationStartDateTime[i], ReservationEndDateTime[i],
                        IsBusinessMeeting[i], IsAccepted[i])
         connection.commit()
@@ -69,15 +69,15 @@ def generate_reservations(sizeA, sizeB, sizeC):
 # TODO we should bind users with their discounts in order to assign correct discounts to users
 # sizeA - size of orders list, sizeB - size of customers list, sizeC - size of discounts list
 def generate_orders(sizeA, sizeB, sizeC):
-    generateID(OrderID, sizeA)
+    # generateID(OrderID, sizeA)
     generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
     generateDatesForOrders(2018, 1, 1, sizeA)
     generateBoolean(sizeA, WasInvoiced, 35)
     generateIDwithNullAndDiffrentListSize(DiscountID, sizeA, sizeC)
 
     for i in range(0, sizeA - 1):
-        cursor.execute("INSERT INTO Orders (OrderID, CustomerID, PlacementDateTime, RealizationDateTime,"
-                       "WasInvoiced, DiscountID) VALUES (?, ?, ?, ?, ?, ?)", OrderID[i], CustomerID[i],
+        cursor.execute("INSERT INTO Orders (CustomerID, PlacementDateTime, RealizationDateTime,"
+                       "WasInvoiced, DiscountID) VALUES (?, ?, ?, ?, ?)", CustomerID[i],
                        OrderPlacementDateTime[i], OrderRealizationDateTime[i], WasInvoiced[i], DiscountID[i])
         connection.commit()
         print("Rows inserted: " + str(connection))
@@ -85,15 +85,19 @@ def generate_orders(sizeA, sizeB, sizeC):
 
 # sizeA - size of order entries list, sizeB - size of products list
 def generate_order_entries(sizeA, sizeB):
-    generateID(OrderID, sizeA)
-    generateIDwithDiffrentListSize(ProductID, sizeA, sizeB)
-    generateQuantity(sizeA)
+    for i in range (1, sizeA):
+        tmp = random.randint(1, 9)
+        generateIDwithDiffrentListSize(ProductID, tmp, sizeB)
+        generateQuantity(tmp)
+        for j in range(0, tmp - 1):
+            try:
+                cursor.execute("INSERT INTO OrderEntries (OrderID, ProductID, Quantity) VALUES (?, ?, ?)", i,
+                           ProductID[j], ProductQuantity[j])
+                connection.commit()
+                print("Rows inserted: " + str(connection))
+            except pyodbc.IntegrityError:
+                pass
 
-    for i in range(0, sizeA - 1):
-        cursor.execute("INSERT INTO OrderEntries (OrderID, ProductID, Quantity) VALUES (?, ?, ?)", OrderID[i],
-                       ProductID[i], ProductQuantity[i])
-        connection.commit()
-        print("Rows inserted: " + str(connection))
 
 
 def generate_products(size):
@@ -113,14 +117,14 @@ def generate_products(size):
 
 # sizeA - size of discounts list size, sizeB - size of customers list size
 def generate_discounts(sizeA, sizeB, numberOfDays):
-    generateID(DiscountID, sizeA)
+    # generateID(DiscountID, sizeA)
     generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
     generateDiscountPercentage(sizeA)
     generateDatesForDiscounts(2018, 1, 1, sizeA, numberOfDays)
 
     for i in range(0, sizeA - 1):
-        cursor.execute("INSERT INTO Discounts (DiscountID, CustomerID, DiscountPercentage, IssuanceDateTime, "
-                       "ExpirationDateTime) VALUES (?, ?, ?, ?, ?)", DiscountID[i], CustomerID[i],
+        cursor.execute("INSERT INTO Discounts (CustomerID, DiscountPercentage, IssuanceDateTime, "
+                       "ExpirationDateTime) VALUES (?, ?, ?, ?)", CustomerID[i],
                        DiscountPercentage[i], DiscountIssuanceDateTime[i], DiscountExpirationDateTime[i])
         connection.commit()
         print("Rows inserted: " + str(connection))
@@ -147,8 +151,8 @@ def insert_roles():
 
 
 def insert_users():
-    generateID(UserID, 7)
-    for i in range(7):
+    generateID(UserID, 8)
+    for i in range(0, 7):
         cursor.execute("INSERT INTO Users (UserID, Login, Name, RoleID) VALUES (?, ?, ?, ?)",
                        UserID[i], UserLogin[i], UserName[i], UserRoles[i])
         connection.commit()
@@ -156,8 +160,8 @@ def insert_users():
 
 
 def insert_functionalities():
-    generateID(FunctionalityID, 4)
-    for i in range(4):
+    generateID(FunctionalityID, 5)
+    for i in range(0, 4):
         cursor.execute("INSERT INTO Permissions (FunctionalityID, FunctionalityName, RoleID) VALUES (?, ?, ?)",
                        FunctionalityID[i], FunctionalitiesName[i], FunctionalitiesToRoles[i])
         connection.commit()

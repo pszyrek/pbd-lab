@@ -221,7 +221,7 @@ def generateProductName(size):
 
 def generateQuantity(size):
     for i in range(0, size - 1):
-        x = random.randint(1, 5)
+        x = random.randint(1, 3)
         ProductQuantity.append(x)
 
 
