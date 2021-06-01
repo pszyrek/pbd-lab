@@ -21,7 +21,7 @@ def main():
     # generate_discounts(discountsSize, customersSize, discountValidDays)
     # generate_products(productsSize)
     # generate_orders(ordersSize, customersSize, discountsSize)
-    # generate_order_entries(orderEntriesSize, productsSize)
+    # generate_order_entries(ordersSize, productsSize)
     # insert_roles()
     # insert_users()
     # insert_functionalities()

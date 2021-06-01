@@ -99,7 +99,6 @@ def generate_order_entries(sizeA, sizeB):
                 pass
 
 
-
 def generate_products(size):
     generateID(ProductID, size)
     generateProductName(size)
