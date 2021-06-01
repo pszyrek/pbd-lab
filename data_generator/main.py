@@ -10,7 +10,7 @@ def main():
     reservationsSize = 1000
     discountsSize = 750
     discountValidDays = 10
-    productsSize = 100
+    productsSize = 1250
     ordersSize = 2000
     orderEntriesSize = 3000
 
