@@ -12,6 +12,7 @@ DiscountID = []
 RoleID = [1, 2, 3, 4]
 UserID = []
 FunctionalityID = []
+customer_discount = {}
 
 # Customer table
 CustomerName = []
@@ -111,6 +112,7 @@ def generateIDwithNullAndDiffrentListSize(list, sizeA, sizeB):
             list.append(null)
         else:
             list.append(x)
+
 
 def generateCustomerName(size):
     CustomerName.clear()
@@ -227,6 +229,6 @@ def generateQuantity(size):
 
 def generateDiscountPercentage(size):
     for i in range(0, size - 1):
-        x = round(random.uniform(0.1, 0.99), 2)
+        x = round(random.uniform(0.1, 0.25), 2)
         DiscountPercentage.append(x)
 

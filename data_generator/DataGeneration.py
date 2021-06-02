@@ -2,7 +2,8 @@ import pyodbc
 
 from DataObjects import *
 
-connection = pyodbc.connect(driver='{SQL Server}', server='(local)', database='PBD_lab', trusted_connection='yes')
+connection = pyodbc.connect(
+    'DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-1;DATABASE=PBD_lab;UID=test;PWD=test')
 cursor = connection.cursor()
 
 
@@ -65,15 +66,14 @@ def generate_reservations(sizeA, sizeB, sizeC):
         print("Rows inserted: " + str(connection))
 
 
-# TODO we should bind users with their discounts in order to assign correct discounts to users
 # sizeA - size of orders list, sizeB - size of customers list, sizeC - size of discounts list
 def generate_orders(sizeA, sizeB, sizeC):
     # generateID(OrderID, sizeA)
     generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
     generateDatesForOrders(2018, 1, 1, sizeA)
     generateBoolean(sizeA, WasInvoiced, 35)
-    generateIDwithNullAndDiffrentListSize(DiscountID, sizeA, sizeC)
-
+    # generateIDwithNullAndDiffrentListSize(DiscountID, sizeA, sizeC)
+    generateDiscountIDwithNullforCustomer(sizeA)
     for i in range(0, sizeA - 1):
         cursor.execute("INSERT INTO Orders (CustomerID, PlacementDateTime, RealizationDateTime,"
                        "WasInvoiced, DiscountID) VALUES (?, ?, ?, ?, ?)", CustomerID[i],
@@ -82,9 +82,9 @@ def generate_orders(sizeA, sizeB, sizeC):
         print("Rows inserted: " + str(connection))
 
 
-# sizeA - size of order entries list, sizeB - size of products list
+# sizeA - size of orders list, sizeB - size of products list
 def generate_order_entries(sizeA, sizeB):
-    for i in range (1, sizeA):
+    for i in range(1, sizeA):
         tmp = random.randint(1, 9)
         generateIDwithDiffrentListSize(ProductID, tmp, sizeB)
         generateQuantity(tmp)
@@ -102,7 +102,7 @@ def generate_products(size):
     generateID(ProductID, size)
     generateProductName(size)
     generatePrice(size, 5.00, 500.00)
-    generateBoolean(size, ProductIsInMenu, 40)
+    generateBoolean(size, ProductIsInMenu, 75)
     generateBoolean(size, ProductIsPreordered, 99)
 
     for i in range(0, size - 1):
@@ -115,7 +115,7 @@ def generate_products(size):
 
 # sizeA - size of discounts list size, sizeB - size of customers list size
 def generate_discounts(sizeA, sizeB, numberOfDays):
-    # generateID(DiscountID, sizeA)
+    generateID(DiscountID, sizeA)
     generateIDwithDiffrentListSize(CustomerID, sizeA, sizeB)
     generateDiscountPercentage(sizeA)
     generateDatesForDiscounts(2018, 1, 1, sizeA, numberOfDays)
@@ -126,19 +126,6 @@ def generate_discounts(sizeA, sizeB, numberOfDays):
                        DiscountPercentage[i], DiscountIssuanceDateTime[i], DiscountExpirationDateTime[i])
         connection.commit()
         print("Rows inserted: " + str(connection))
-
-
-def test_insert():
-    cursor.execute("INSERT INTO Customers (CustomerID, CompanyID, Name, Surname, EmailAdress, PhoneNumber)"
-                   "VALUES (?, ?, ?, ?, ?, ?)", 1, None, "Name", "Surname", "Mail", "PhoneNumber")
-    connection.commit()
-    print("Rows inserted: " + str(connection))
-
-
-def test_select():
-    cursor.execute("SELECT DiscountID, CustomerID FROM Discounts")
-    for row in cursor.fetchall():
-        print(row)
 
 
 def insert_roles():
@@ -164,3 +151,59 @@ def insert_functionalities():
                        FunctionalityID[i], FunctionalitiesName[i], FunctionalitiesToRoles[i])
         connection.commit()
         print("Rows inserted: " + str(connection))
+
+
+def get_user_discount_dict():
+    customer_discount.clear()
+    cursor.execute("SELECT DiscountID ,CustomerID FROM Discounts")
+    records = cursor.fetchall()
+    columnNames = [column[0] for column in cursor.description]
+    insertObjectList = []
+    for record in records:
+        insertObjectList.append(dict(zip(columnNames, record)))
+
+    for i in insertObjectList:
+        discountID = i['DiscountID']
+        customerID = i['CustomerID']
+        if customerID in customer_discount:
+            customer_discount[customerID].append(discountID)
+        else:
+            customer_discount[customerID] = [discountID]
+
+
+def generateDiscountIDforCustomer(customerID):
+    get_user_discount_dict()
+    discounts = customer_discount.get(customerID)
+    return discounts
+
+
+def generateDiscountIDwithNullforCustomer(sizeA):
+    DiscountID.clear()
+    null = None
+    values = [1, 2]
+    distribution = [.65, .35]
+    for i in range(1, sizeA):
+        discounts = generateDiscountIDforCustomer(i)
+        random_number = random.choices(values, distribution)
+        # check if list is empty
+        if discounts:
+            x = random.choice(discounts)
+        else:
+            x = None
+        if random_number == [1]:
+            DiscountID.append(null)
+        else:
+            DiscountID.append(x)
+
+
+def test_insert():
+    cursor.execute("INSERT INTO Customers (CustomerID, CompanyID, Name, Surname, EmailAdress, PhoneNumber)"
+                   "VALUES (?, ?, ?, ?, ?, ?)", 1, None, "Name", "Surname", "Mail", "PhoneNumber")
+    connection.commit()
+    print("Rows inserted: " + str(connection))
+
+
+def test_select():
+    cursor.execute("SELECT DiscountID, CustomerID FROM Discounts")
+    for row in cursor.fetchall():
+        print(row)

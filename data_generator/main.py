@@ -26,11 +26,12 @@ def main():
     insert_users()
     insert_functionalities()
 
+    # get_user_discount_dict()
+    # print(customer_discount)
+    # print(generateDiscountIDforCustomer(59))
+
     # test_insert()
     # test_select()
-
-
-
 
 if __name__ == "__main__":
     main()
