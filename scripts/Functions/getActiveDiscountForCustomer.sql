@@ -5,7 +5,9 @@ RETURNS bigint
 BEGIN
 	DECLARE @LatestActiveDiscountId bigint = 
 	(SELECT TOP 1 DiscountId FROM Discounts
-	WHERE GETDATE() BETWEEN IssuanceDateTime AND ExpirationDateTime
+	WHERE 
+		CustomerID = @CustomerId AND
+		GETDATE() BETWEEN IssuanceDateTime AND ExpirationDateTime
 	ORDER BY IssuanceDateTime DESC)
 
 	RETURN @LatestActiveDiscountId
