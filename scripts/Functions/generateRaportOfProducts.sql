@@ -24,10 +24,15 @@ RETURNS TABLE
 AS
 RETURN 
 (
-	SELECT dbo.OrderEntrySummaries.TotalNet, dbo.OrderEntrySummaries.TotalGross, dbo.OrderEntrySummaries.Quantity, dbo.Products.Name, dbo.Products.TotalPrice
-		FROM dbo.OrderEntrySummaries INNER JOIN
-			dbo.Products ON dbo.OrderEntrySummaries.ProductID = dbo.Products.ProductID INNER JOIN
-			dbo.Orders ON dbo.OrderEntrySummaries.OrderID = dbo.Orders.OrderID
+	SELECT 
+	dbo.OrderEntrySummaries.TotalNet,
+	dbo.OrderEntrySummaries.TotalGross,
+	dbo.OrderEntrySummaries.Quantity,
+	dbo.Products.Name,
+	dbo.Products.TotalPrice AS UnitPrice
+		FROM dbo.OrderEntrySummaries 
+		INNER JOIN dbo.Products ON dbo.OrderEntrySummaries.ProductID = dbo.Products.ProductID 
+		INNER JOIN dbo.Orders ON dbo.OrderEntrySummaries.OrderID = dbo.Orders.OrderID
 			WHERE dbo.Orders.RealizationDateTime BETWEEN @startDate AND @endDate
 )
 GO
