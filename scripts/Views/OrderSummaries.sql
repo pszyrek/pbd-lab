@@ -20,7 +20,7 @@ CASE
 END AS TotalNet,
 WasInvoiced
 FROM Orders orders
-LEFT JOIN OrderEntrySummaries entries ON orders.OrderID = entries.OrderID
+INNER JOIN OrderEntrySummaries entries ON orders.OrderID = entries.OrderID
 LEFT JOIN Discounts discounts ON orders.DiscountID = discounts.DiscountID
 GROUP BY 
 orders.OrderID, 
