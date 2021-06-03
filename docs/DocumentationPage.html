@@ -1,0 +1,706 @@
+﻿<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>PBD_lab</title>
+    <style>
+                    /* simple reset */
+                    html, body, ul, ol, li, form, fieldset, h1, h2, h3, h4, h5, h6, p { margin: 0; font-family:Sans-Serif; font-size:12px;line-height:1.4em;}
+                    fieldset,img { border: 0; }
+                    li { list-style: circle; }
+                    sup { vertical-align: text-top; }
+                    sub { vertical-align: text-bottom; }
+                    table{border-collapse: collapse;border-spacing: 0;}
+                    caption, th, td{text-align: left;vertical-align: top;font-weight: normal;}
+                    input, textarea, select{line-height: 1.1;}
+                    /*Content*/
+                    body {margin:16px; background-color:#f0f0f0; }
+                    h1 {font-weight:normal;color:#156F89;font-size:300%;margin-bottom:0.5em;}
+                    h2 { clear:both;font-weight:normal;color:#000000;font-size:220%;margin-top:1em;margin-bottom:0.5em;}
+                    h3 { clear:both;font-weight:normal;color:#000000;font-size:160%;margin-top:1em;margin-bottom:0.5em;}
+                    a, a:visited {color:#000000;}
+                    .navBar {}
+                    .object { clear:both; background-color:#ffffff; padding:10px;margin-top:10px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #e9e9e9;}
+                    .object h3 {margin-top:0px;}
+                    .comment {margin-bottom:1em;}
+                    .attributes {}
+                    .attribute {clear:both;border-top:1px solid #e9e9e9;padding-top:6px;padding-bottom:6px;}
+                    .attributeName {float:left;width:200px;}
+                    .attributeComment {margin-left:220px;}
+                    .footer {margin:0.5em;margin-top:1em;}
+                </style>
+  </head>
+  <body>
+    <h1>PBD_lab</h1>
+    <div class="navBar">Jump to: 
+                <a href="#Table">Table</a> <a href="#StoredProcedure">StoredProcedure</a> <a href="#Function">Function</a> <a href="#View">View</a> <a href="#Schema">Schema</a> </div>
+    <div class="groups">
+      <div class="group"><a name="Table"></a><h2>Table</h2>
+        <div class="objects">
+          <div class="object">
+            <h3>dbo.Companies</h3>
+            <div class="comment"><p>Tabela Companies przechowuje informację dotyczące firm, których pracownicy są klientami resturacji.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">CompanyID</div>
+                <div class="attributeComment">Identyfikator firmy</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Name</div>
+                <div class="attributeComment">Nazwa firmy</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Adress</div>
+                <div class="attributeComment">Adres firmy</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TaxID</div>
+                <div class="attributeComment">Numer NIP firmy</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Customers</h3>
+            <div class="comment"><p>Tabela Customers przechowuje informacje dotyczące klientów restauracji.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">CustomerID</div>
+                <div class="attributeComment">Identyfikator klienta</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">CompanyID</div>
+                <div class="attributeComment">Identyfikator firmy, w której pracuje klient. W przypadku kiedy wartość tego pola jest równa NULL, mamy do czynienia z klientem indywidualnym.</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Name</div>
+                <div class="attributeComment">Imię klienta</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Surname</div>
+                <div class="attributeComment">Nazwisko klienta</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">EmailAdress</div>
+                <div class="attributeComment">Adress email klienta</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">PhoneNumber</div>
+                <div class="attributeComment">Numer telefonu klienta</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Discounts</h3>
+            <div class="comment"><p>Tabela Discounts przechowuje informacje dotyczące rabatów przyznawanych klientom.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">DiscountID</div>
+                <div class="attributeComment">Indetyfikator rabatu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">CustomerID</div>
+                <div class="attributeComment">Identyfikator klienta, któremu został przyznany rabat</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">DiscountPercentage</div>
+                <div class="attributeComment">Wysokość rabatu przedstawiona w postaci liczby dziesiętnej</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">IssuanceDateTime</div>
+                <div class="attributeComment">Data i godzina wydania rabatu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">ExpirationDateTime</div>
+                <div class="attributeComment">Data i godzina ważności rabatu</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.OrderEntries</h3>
+            <div class="comment"><p>Tabela OrderEntries przechowuje informacje dotyczące poszczególnych pozycji znajdujących się w zamówieniu</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">OrderID</div>
+                <div class="attributeComment">Identyfikator zamówienia, którego częścią jest OrderEntry</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">ProductID</div>
+                <div class="attributeComment">Identyfikator produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Quantity</div>
+                <div class="attributeComment">Ilość produktu</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Orders</h3>
+            <div class="comment"><p>Tabela Orders przechwouje informacje dotyczące zamówień składanych w restauracji</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">OrderID</div>
+                <div class="attributeComment">Identyfikator zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">CustomerID</div>
+                <div class="attributeComment">Indentyfikator klienta, który złożył zamówienie</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">PlacementDateTime</div>
+                <div class="attributeComment">Data złożenia zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">RealizationDateTime</div>
+                <div class="attributeComment">Data realizacji zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">WasInvoiced</div>
+                <div class="attributeComment">Wartość typu boolean wskazująca czy zamówianie zostało już uwzględnione na fakturze</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">DiscountID</div>
+                <div class="attributeComment">Identyfikator rabatu, w przypadku kiedy jego wartość jest równa NULL, żaden rabat nie został wykorzystany podczas składania tego zamówienia</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Permissions</h3>
+            <div class="comment"><p>Tabela Permissions jest częścią modułu odpowiedzialnego za uprawnienia do korzystania z systemu. Przechowuje informacje dotyczące minimalnej wymaganej roli jaką musi posiadać użytkownik, aby móc wykonać daną funkcjonalność.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">FunctionalityID</div>
+                <div class="attributeComment">Identyfikator funkcjonalności</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">FunctionalityName</div>
+                <div class="attributeComment">Nazwa funkcjonalności</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">RoleID</div>
+                <div class="attributeComment">Minimalna wartość indetyfikatora roli, która pozwala na wykonanie danej funkcjonalności</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Products</h3>
+            <div class="comment"><p>Tabela Products przechowuje informacje dotyczące pozycji znajdujących się w ofercie restauracji.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">ProductID</div>
+                <div class="attributeComment">Identyfikator produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Name</div>
+                <div class="attributeComment">Nazwa produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TotalPrice</div>
+                <div class="attributeComment">Całkowita cena produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">IsInMenu</div>
+                <div class="attributeComment">Wartość typu boolean, wskazująca czy dany produkt jest aktualnie dostępny w ofercie restauracji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">IsPreordered</div>
+                <div class="attributeComment">Wartość typu boolean, wskazująca czy dany produkt musi być zamówiony z wyprzedzeniem, w określonych dniach tygodnia</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Reservations</h3>
+            <div class="comment"><p>Tabela Reservations przechowuje informacje dotyczące rezerwacji składanych przez klientów restauracji.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">ReservationID</div>
+                <div class="attributeComment">Identyfikator rezerwacji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">CustomerID</div>
+                <div class="attributeComment">Identyfikator klienta składającego rezerwację</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TableID</div>
+                <div class="attributeComment">Identyfikator stolika, który został zarezerwowany</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">PlacementDateTime</div>
+                <div class="attributeComment">Data i godzina złożenia rezerwacji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">ReservationStartDateTime</div>
+                <div class="attributeComment">Data i godzina rozpoczęcia rezerwacji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">ReservationEndDateTime</div>
+                <div class="attributeComment">Data i godzina zakończenia rezerwacji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">IsBusinessMeeting</div>
+                <div class="attributeComment">Wartość typu boolean, wskazująca czy rezerwacja została wykonana na firmę</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">IsAccepted</div>
+                <div class="attributeComment">Wartość typu boolean, wskazująca czy rezerwacja została zaakceptowana przez pracownika restauracji</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Roles</h3>
+            <div class="comment"><p>Tabel Roles jest częścią modułu odpowiedzialnego za uprawnienia do korzystania z systemu. Zawiera wszystkie role występujące w systemie.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">RoleID</div>
+                <div class="attributeComment">Identyfikator roli</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Name</div>
+                <div class="attributeComment">Nazwa roli</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Tables</h3>
+            <div class="comment"><p>Tabela Tables przechowuje informacje dotyczące dostępności stolików znajdujących sie w restauracji</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">TableID</div>
+                <div class="attributeComment">Identyfikator stolika</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">IsActive</div>
+                <div class="attributeComment">Wartość typu boolean, wskazująca czy dany stolik jest dostępny</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.Users</h3>
+            <div class="comment"><p>Tabela Users jest częścią modułu odpowiedzialnego za uprawnienia do korzystania z systemu. Zawiera informacje dotyczące wszystkich użytkowników zdefiniowanych w systemie.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">UserID</div>
+                <div class="attributeComment">Identyfikator użytkownika</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Login</div>
+                <div class="attributeComment">Login użytkownika</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Name</div>
+                <div class="attributeComment">Nazwa użytkownika</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">RoleID</div>
+                <div class="attributeComment">Indetyfikator roli przypisanej do użytkownika</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="group"><a name="StoredProcedure"></a><h2>StoredProcedure</h2>
+        <div class="objects">
+          <div class="object">
+            <h3>dbo.GenerateVat</h3>
+            <div class="comment"><p>Procedura generująca fakturę vat dla danego zamówienia.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@order_id</div>
+                <div class="attributeComment">Identyfikator zamówienia</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.GenerateVatFromDateRange</h3>
+            <div class="comment"><p>Procedura generująca dane do faktury vat na zamówienia z danego przedziału czasowego.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@client_id</div>
+                <div class="attributeComment">Identyfikator klienta</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@start_date</div>
+                <div class="attributeComment">Początek przedziału czasowego uwzględniającego zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@end_date</div>
+                <div class="attributeComment">Koniec przedziału czasowego uwzględniającego zamówienia</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.IssueDiscount</h3>
+            <div class="comment"><p>Procedura przyznająca rabat klientowi restauracji.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@CustomerId</div>
+                <div class="attributeComment">Identyfikator użytkownika otrzymującego rabat</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.PlaceOrder</h3>
+            <div class="comment"><p>Procedura składająca zamówienie.
+Procedura może wyrzucić błąd w sytuacji, gdy którykolwiek z zamawianych produktów nie jest dostępny. W celu uniknięcia błędu należy wcześniej sprawdzić czy widok "ActiveMenu" zawiera zamawiany produkt.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@CustomerId</div>
+                <div class="attributeComment">Identyfikator użytkownika składającego zamówienie</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@RealizationDate</div>
+                <div class="attributeComment">Docelowy czas realizacji zamówienia (czas odbioru)</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@Order</div>
+                <div class="attributeComment">Tabela reprezentująca identyfikatory zamawianych produktów oraz ich ilości</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.PlaceReservation</h3>
+            <div class="comment"><p>Procedura rezerwująca stolik.
+Procedura może wyrzucić błąd w sytuacji, gdy stolik który próbujemy zarezerwować, został już zarezerwowany. W celu uniknięcia błędu należy wcześniej sprawdzić dostępność stolików za pomocą funkcji "get<em>available</em>tables_ids".</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@TableId</div>
+                <div class="attributeComment">Identyfikator stolika</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@CustomerId</div>
+                <div class="attributeComment">Identyfiaktor klienta rezerwującego stolik</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@StartDateTime</div>
+                <div class="attributeComment">Czas rozpoczęcia trwania rezerwacji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@EndDateTime</div>
+                <div class="attributeComment">Czas zakończenia trwania rezerwacji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@IsBussinessMeeting</div>
+                <div class="attributeComment">Flaga informująca czy rezerwacja jest spotkaniem firmowym</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="group"><a name="Function"></a><h2>Function</h2>
+        <div class="objects">
+          <div class="object">
+            <h3>dbo.apply_discount</h3>
+            <div class="comment"><p>Funkcja obliczająca wartość ceny po zastosowaniu rabatu.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">
+                </div>
+                <div class="attributeComment">Wartość ceny po zastosowaniu rabatu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@original_price</div>
+                <div class="attributeComment">Oryginalna wartość ceny</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@discount_percentage</div>
+                <div class="attributeComment">Procentowa wartość rabatu</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.calculate_net_price</h3>
+            <div class="comment"><p>Funkcja obliczająca wartość netto danej ceny brutto.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">
+                </div>
+                <div class="attributeComment">Obliczona cena netto</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@gross_price</div>
+                <div class="attributeComment">Cena brutto</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.can_preorder</h3>
+            <div class="comment"><p>Funcja zwaracająca flagę informującą czy możliwe jest zamówenie produktów wymagających wcześniejszego zamówienia (szczególnie owoce morza) w momencie jej wywołania.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">
+                </div>
+                <div class="attributeComment">Flaga informująca czy możliwe jest zamówienie produktów wymagających wcześniejszego zamówienia</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.containts_preordered_products</h3>
+            <div class="comment"><p>Funkcja zwracająca flagę informującą czy składane zamówienie zawiera produkty wymagające wcześniejszego zamówienia.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">
+                </div>
+                <div class="attributeComment">Flaga informująca czy zamówienie zawiera produkty które wymagają wcześniejszego zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@Order</div>
+                <div class="attributeComment">Tabela reprezentująca identyfikatory zamawianych produktów oraz ich ilości</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.generate_raport_of_products</h3>
+            <div class="comment"><p>Funkcja generująca raport o ilości oraz wartości wszystkich sprzedanych produktów w danym przedziale czasowym.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@startDate</div>
+                <div class="attributeComment">Początek przedziału czasowego dla generowanego raportu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@endDate</div>
+                <div class="attributeComment">Koniec przedziału czasowego dla generowanego raportu</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.generate_raport_of_reservation_time</h3>
+            <div class="comment"><p>Funkcja generująca raport o czasie rezerwacji dla poszczególnych klientów w danym przedziale czasowym.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@startDate</div>
+                <div class="attributeComment">Początek przedziału czasowego dla generowanego raportu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@endDate</div>
+                <div class="attributeComment">Koniec przedziału czasowego dla generowanego raportu</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.get_active_discount_id_for_customer</h3>
+            <div class="comment"><p>Funkcja zwracająca identyfikator aktywnego rabatu dla danego użytkownika lub wartość NULL jeżeli użytkownik nie posiada aktywnego rabatu.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">
+                </div>
+                <div class="attributeComment">Identyfikator aktywnego rabatu lub wartość NULL</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@CustomerId</div>
+                <div class="attributeComment">Identyfikator użytkownika</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.get_available_tables_ids</h3>
+            <div class="comment"><p>Funkcja zwracająca listę dostępnych do rezerwacji stolików w danym przedziale czasowym.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">@StartDateTime</div>
+                <div class="attributeComment">Początek przedziału czasu dla rezerwacji</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@EndDateTime</div>
+                <div class="attributeComment">Koniec przedziału czasu dla rezerwacji</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.qualifies_for_discount</h3>
+            <div class="comment"><p>Funkcja zwracająca flagę informująca czy klient kwalifikuje się do przyznania rabatu.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">
+                </div>
+                <div class="attributeComment">Flaga informująca czy klient kwalifikuje się do przyznania rabatu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">@ClientId</div>
+                <div class="attributeComment">Identyfikator klienta</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="group"><a name="View"></a><h2>View</h2>
+        <div class="objects">
+          <div class="object">
+            <h3>dbo.ActiveDiscounts</h3>
+            <div class="comment"><p>Widok zawierający aktywne rabaty użytkowników.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">DiscountID</div>
+                <div class="attributeComment">Identyfikator rabatu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">CustomerID</div>
+                <div class="attributeComment">Identyfikator użytkownika</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">DiscountPercentage</div>
+                <div class="attributeComment">Wartość procentowa rabatu</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.ActiveMenu</h3>
+            <div class="comment"><p>Widok zawierający produkty dostępne do zamówienia.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">ProductID</div>
+                <div class="attributeComment">Identyfikator produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Name</div>
+                <div class="attributeComment">Nazwa produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TotalPrice</div>
+                <div class="attributeComment">Całkowita cena produktu</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.OrderEntrySummaries</h3>
+            <div class="comment"><p>Widok zawierający podsumowania pozycji w zamówieniach.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">OrderID</div>
+                <div class="attributeComment">Identyfikator zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">ProductID</div>
+                <div class="attributeComment">Identyfikator produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Quantity</div>
+                <div class="attributeComment">Ilość zamówionego produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TotalGross</div>
+                <div class="attributeComment">Całkowita cena brutto</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TotalNet</div>
+                <div class="attributeComment">Całkowita cena netto</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.OrderSummaries</h3>
+            <div class="comment"><p>Widok zawierający podsumowania zamówień.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">OrderId</div>
+                <div class="attributeComment">Identyfikator zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">CustomerID</div>
+                <div class="attributeComment">Identyfikator klienta</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">PlacementDateTime</div>
+                <div class="attributeComment">Czas złożenia zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">RealizationDateTime</div>
+                <div class="attributeComment">Docelowy czas realizacji zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TotalQuantity</div>
+                <div class="attributeComment">Całkowita liczba produktów zawartych w zamówieniu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">AbsoluteGross</div>
+                <div class="attributeComment">Absolutna cena brutto zamówienia (nie uwzględnia rabatów)</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">AbsoluteNet</div>
+                <div class="attributeComment">Absolutna cena netto zamówienia (nie uwzględnia rabatów)</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">DiscountPercentage</div>
+                <div class="attributeComment">Wartość procentowa rabatu towarzyszącego zamówieniu (NULL jeżeli brak rabatu)</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TotalGross</div>
+                <div class="attributeComment">Cena brutto zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">TotalNet</div>
+                <div class="attributeComment">Cena netto zamówienia</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">WasInvoiced</div>
+                <div class="attributeComment">Flaga informująca czy na zamówienie została wypisana faktura</div>
+              </div>
+            </div>
+          </div>
+          <div class="object">
+            <h3>dbo.TaxedProducts</h3>
+            <div class="comment"><p>Widok zawierający opodatkowane produkty.</p>
+</div>
+            <div class="attributes">
+              <div class="attribute">
+                <div class="attributeName">ProductID</div>
+                <div class="attributeComment">Identyfikator produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">Name</div>
+                <div class="attributeComment">Nazwa produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">GrossPrice</div>
+                <div class="attributeComment">Cena brutto produktu</div>
+              </div>
+              <div class="attribute">
+                <div class="attributeName">NetPrice</div>
+                <div class="attributeComment">Cena netto produktu</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="group"><a name="Schema"></a><h2>Schema</h2>
+        <div class="objects">
+          <div class="object">
+            <h3>db_owner</h3>
+            <div class="attributes"></div>
+          </div>
+          <div class="object">
+            <h3>dbo</h3>
+            <div class="attributes"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">Generated by Database Note Taker</div>
+  </body>
+</html>
