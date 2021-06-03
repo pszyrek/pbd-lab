@@ -28,4 +28,4 @@ orders.CustomerID,
 orders.PlacementDateTime, 
 orders.RealizationDateTime,
 orders.WasInvoiced,
-discounts.DiscountPercentagers.CustomerID, orders.PlacementDateTime, orders.RealizationDateTime, discounts.DiscountPercentage, orders.WasInvoiced
+discounts.DiscountPercentage
