@@ -9,6 +9,8 @@
 -- This block of comments will not be included in
 -- the definition of the function.
 -- ================================================
+USE PBD_lab
+GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -24,10 +26,18 @@ RETURNS TABLE
 AS
 RETURN 
 (
-	SELECT dbo.OrderEntrySummaries.TotalNet, dbo.OrderEntrySummaries.TotalGross, dbo.OrderEntrySummaries.Quantity, dbo.Products.Name, dbo.Products.TotalPrice
-		FROM dbo.OrderEntrySummaries INNER JOIN
-			dbo.Products ON dbo.OrderEntrySummaries.ProductID = dbo.Products.ProductID INNER JOIN
-			dbo.Orders ON dbo.OrderEntrySummaries.OrderID = dbo.Orders.OrderID
+	SELECT
+	dbo.Products.Name,
+	SUM(dbo.OrderEntrySummaries.TotalNet) AS TotalNetValue,
+	SUM(dbo.OrderEntrySummaries.TotalGross) AS TotalGrossValue,
+	SUM(dbo.OrderEntrySummaries.Quantity) AS TotalQuantity,
+	dbo.Products.TotalPrice AS UnitPrice
+		FROM dbo.OrderEntrySummaries 
+		INNER JOIN dbo.Products ON dbo.OrderEntrySummaries.ProductID = dbo.Products.ProductID 
+		INNER JOIN dbo.Orders ON dbo.OrderEntrySummaries.OrderID = dbo.Orders.OrderID
 			WHERE dbo.Orders.RealizationDateTime BETWEEN @startDate AND @endDate
-)
+			GROUP BY 
+			dbo.Products.ProductID, 
+			dbo.Products.Name,
+			dbo.Products.TotalPrice)
 GO

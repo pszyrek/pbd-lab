@@ -18,15 +18,22 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-ALTER FUNCTION dbo.generate_raport_of_reservation_time(@startDate DATETIME, @endDate DATETIME)
+CREATE FUNCTION dbo.generate_raport_of_reservation_time(@startDate DATETIME, @endDate DATETIME)
 RETURNS TABLE 
 AS
 RETURN 
 (
-	SELECT dbo.Customers.Name, dbo.Customers.Surname, dbo.Customers.PhoneNumber,
-		(DATEDIFF(second, dbo.Reservations.ReservationStartDateTime, dbo.Reservations.ReservationEndDateTime) / 3600.0) AS ReservationTime
-		FROM dbo.Customers INNER JOIN
-			dbo.Reservations ON dbo.Customers.CustomerID = dbo.Reservations.CustomerID
+	SELECT 
+	dbo.Customers.Name,
+	dbo.Customers.Surname,
+	dbo.Customers.PhoneNumber,
+	SUM(DATEDIFF(second, dbo.Reservations.ReservationStartDateTime, dbo.Reservations.ReservationEndDateTime) / 3600.0) AS ReservationTime
+		FROM dbo.Customers 
+		INNER JOIN dbo.Reservations ON dbo.Customers.CustomerID = dbo.Reservations.CustomerID
 			WHERE dbo.Reservations.PlacementDateTime BETWEEN @startDate AND @endDate
+			GROUP BY 
+			dbo.Customers.Name, 
+			dbo.Customers.Surname, 
+			dbo.Customers.PhoneNumber
 )
 GO
