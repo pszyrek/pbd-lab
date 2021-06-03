@@ -13,7 +13,7 @@
 		<AuthType>windows</AuthType>
 		<Database>PBD_lab</Database>
 		<Password />
-		<Server>DESKTOP-1</Server>
+		<Server>DESKTOP-204LTTQ</Server>
 		<StorePassword>false</StorePassword>
 		<User></User>
 	</Connection>
@@ -322,84 +322,433 @@
 				</History>
 			</Object>
 		</Group>
+		<Group Type="StoredProcedure">
+			<Object Name="dbo.GenerateVat" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Procedura generująca fakturę vat dla danego zamówienia.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:40:13" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@order_id" sortOrder="1" type="bigint">
+						<Comment>Identyfikator zamówienia</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 1 attributes" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@order_id comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.GenerateVatFromDateRange" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Procedura generująca dane do faktury vat na zamówienia z danego przedziału czasowego.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:39:19" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@client_id" sortOrder="1" type="bigint">
+						<Comment>Identyfikator klienta</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:39:19" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@end_date" sortOrder="3" type="datetime">
+						<Comment>Koniec przedziału czasowego uwzględniającego zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:39:19" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@start_date" sortOrder="2" type="datetime">
+						<Comment>Początek przedziału czasowego uwzględniającego zamówienia</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 3 attributes" />
+					<Record When="2021-06-03T19:39:26" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@client_id comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@end_date comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@start_date comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.IssueDiscount" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Procedura przyznająca rabat klientowi restauracji.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 18:09:51" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@CustomerId" sortOrder="1" type="bigint">
+						<Comment>Identyfikator użytkownika otrzymującego rabat</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 1 attributes" />
+					<Record When="2021-06-03T18:09:36" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@CustomerId comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.PlaceOrder" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Procedura składająca zamówienie.
+Procedura może wyrzucić błąd w sytuacji, gdy którykolwiek z zamawianych produktów nie jest dostępny. W celu uniknięcia błędu należy wcześniej sprawdzić czy widok "ActiveMenu" zawiera zamawiany produkt.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 18:15:08" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@CustomerId" sortOrder="1" type="bigint">
+						<Comment>Identyfikator użytkownika składającego zamówienie</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:15:08" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@Order" sortOrder="3" type="OrderItems">
+						<Comment>Tabela reprezentująca identyfikatory zamawianych produktów oraz ich ilości</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:15:08" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@RealizationDate" sortOrder="2" type="datetime">
+						<Comment>Docelowy czas realizacji zamówienia (czas odbioru)</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 3 attributes" />
+					<Record When="2021-06-03T19:29:00" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@CustomerId comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@Order comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@RealizationDate comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.PlaceReservation" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Procedura rezerwująca stolik.
+Procedura może wyrzucić błąd w sytuacji, gdy stolik który próbujemy zarezerwować, został już zarezerwowany. W celu uniknięcia błędu należy wcześniej sprawdzić dostępność stolików za pomocą funkcji "get_available_tables_ids".</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 18:22:29" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@CustomerId" sortOrder="2" type="bigint">
+						<Comment>Identyfiaktor klienta rezerwującego stolik</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:22:29" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@EndDateTime" sortOrder="4" type="datetime">
+						<Comment>Czas zakończenia trwania rezerwacji</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:22:29" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@IsBussinessMeeting" sortOrder="5" type="bit">
+						<Comment>Flaga informująca czy rezerwacja jest spotkaniem firmowym</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:22:29" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@StartDateTime" sortOrder="3" type="datetime">
+						<Comment>Czas rozpoczęcia trwania rezerwacji</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:22:29" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@TableId" sortOrder="1" type="bigint">
+						<Comment>Identyfikator stolika</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 5 attributes" />
+					<Record When="2021-06-03T18:22:41" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@CustomerId comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@EndDateTime comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@IsBussinessMeeting comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@StartDateTime comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@TableId comment changed" />
+				</History>
+			</Object>
+		</Group>
 		<Group Type="Function">
 			<Object Name="dbo.apply_discount" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Funkcja obliczająca wartość ceny po zastosowaniu rabatu.</Comment>
 				<Attributes>
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="decimal" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@discount_percentage" sortOrder="2" type="decimal" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@original_price" sortOrder="1" type="decimal" />
+					<Attribute commentModified="03.06.2021 18:27:00" created="2021-06-03T18:26:41" modified="2021-06-03T18:26:41" name="" sortOrder="0" type="decimal">
+						<Comment>Wartość ceny po zastosowaniu rabatu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:23:58" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@discount_percentage" sortOrder="2" type="decimal">
+						<Comment>Procentowa wartość rabatu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:23:58" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@original_price" sortOrder="1" type="decimal">
+						<Comment>Oryginalna wartość ceny</Comment>
+					</Attribute>
 				</Attributes>
 				<History>
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+					<Record When="2021-06-03T18:24:12" Who="Jaro" Description="Removed " />
+					<Record When="2021-06-03T18:26:41" Who="Jaro" Description="Loaded " />
+					<Record When="2021-06-03T18:23:38" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description=" comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@discount_percentage comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@original_price comment changed" />
 				</History>
 			</Object>
 			<Object Name="dbo.calculate_net_price" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Funkcja obliczająca wartość netto danej ceny brutto.</Comment>
 				<Attributes>
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="decimal" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@gross_price" sortOrder="1" type="decimal" />
+					<Attribute commentModified="03.06.2021 18:26:34" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="decimal">
+						<Comment>Obliczona cena netto</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 18:26:34" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="@gross_price" sortOrder="1" type="decimal">
+						<Comment>Cena brutto</Comment>
+					</Attribute>
 				</Attributes>
 				<History>
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 2 attributes" />
+					<Record When="2021-06-03T18:26:34" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description=" comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@gross_price comment changed" />
 				</History>
 			</Object>
 			<Object Name="dbo.can_preorder" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Funcja zwaracająca flagę informującą czy możliwe jest zamówenie produktów wymagających wcześniejszego zamówienia (szczególnie owoce morza) w momencie jej wywołania.</Comment>
 				<Attributes>
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="bit" />
+					<Attribute commentModified="03.06.2021 19:09:38" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="" sortOrder="0" type="bit">
+						<Comment>Flaga informująca czy możliwe jest zamówienie produktów wymagających wcześniejszego zamówienia</Comment>
+					</Attribute>
 				</Attributes>
 				<History>
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 1 attributes" />
+					<Record When="2021-06-03T19:09:38" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description=" comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.containts_preordered_products" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Funkcja zwracająca flagę informującą czy składane zamówienie zawiera produkty wymagające wcześniejszego zamówienia.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:11:53" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="" sortOrder="0" type="bit">
+						<Comment>Flaga informująca czy zamówienie zawiera produkty które wymagają wcześniejszego zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:12:00" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@Order" sortOrder="1" type="OrderItems">
+						<Comment>Tabela reprezentująca identyfikatory zamawianych produktów oraz ich ilości</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 2 attributes" />
+					<Record When="2021-06-03T19:11:05" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description=" comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@Order comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.generate_raport_of_products" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Funkcja generująca raport o ilości oraz wartości wszystkich sprzedanych produktów w danym przedziale czasowym.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:17:03" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@endDate" sortOrder="2" type="datetime">
+						<Comment>Koniec przedziału czasowego dla generowanego raportu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:17:03" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@startDate" sortOrder="1" type="datetime">
+						<Comment>Początek przedziału czasowego dla generowanego raportu</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 2 attributes" />
+					<Record When="2021-06-03T19:16:33" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@endDate comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@startDate comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.generate_raport_of_reservation_time" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Funkcja generująca raport o czasie rezerwacji dla poszczególnych klientów w danym przedziale czasowym.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:18:26" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@endDate" sortOrder="2" type="datetime">
+						<Comment>Koniec przedziału czasowego dla generowanego raportu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:18:02" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@startDate" sortOrder="1" type="datetime">
+						<Comment>Początek przedziału czasowego dla generowanego raportu</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 2 attributes" />
+					<Record When="2021-06-03T19:17:56" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@endDate comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@startDate comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.get_active_discount_id_for_customer" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Funkcja zwracająca identyfikator aktywnego rabatu dla danego użytkownika lub wartość NULL jeżeli użytkownik nie posiada aktywnego rabatu.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:21:53" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="" sortOrder="0" type="bigint">
+						<Comment>Identyfikator aktywnego rabatu lub wartość NULL</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:21:53" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@CustomerId" sortOrder="1" type="bigint">
+						<Comment>Identyfikator użytkownika</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 2 attributes" />
+					<Record When="2021-06-03T19:20:41" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description=" comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@CustomerId comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.get_available_tables_ids" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Funkcja zwracająca listę dostępnych do rezerwacji stolików w danym przedziale czasowym.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:23:08" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@EndDateTime" sortOrder="2" type="datetime">
+						<Comment>Koniec przedziału czasu dla rezerwacji</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:23:08" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@StartDateTime" sortOrder="1" type="datetime">
+						<Comment>Początek przedziału czasu dla rezerwacji</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 2 attributes" />
+					<Record When="2021-06-03T19:23:08" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@EndDateTime comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@StartDateTime comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.qualifies_for_discount" Created="2021-06-03T17:03:22" CommentModified="2021-06-03T17:03:22" CommentModifiedBy="">
+				<Comment>Funkcja zwracająca flagę informująca czy klient kwalifikuje się do przyznania rabatu.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:24:40" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="" sortOrder="0" type="bit">
+						<Comment>Flaga informująca czy klient kwalifikuje się do przyznania rabatu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:24:40" created="2021-06-03T17:03:22" modified="2021-06-03T17:03:22" name="@ClientId" sortOrder="1" type="bigint">
+						<Comment>Identyfikator klienta</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:22" Who="Jaro" Description="Loaded 2 attributes" />
+					<Record When="2021-06-03T19:24:40" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description=" comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="@ClientId comment changed" />
 				</History>
 			</Object>
 		</Group>
 		<Group Type="View">
 			<Object Name="dbo.ActiveDiscounts" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Widok zawierający aktywne rabaty użytkowników.</Comment>
 				<Attributes>
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CustomerID" null="not null" sortOrder="2" type="bigint" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountID" null="not null" sortOrder="1" type="bigint" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountPercentage" null="not null" sortOrder="3" type="decimal" />
+					<Attribute commentModified="03.06.2021 19:26:22" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="CustomerID" null="not null" sortOrder="2" type="bigint">
+						<Comment>Identyfikator użytkownika</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:26:22" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountID" null="not null" sortOrder="1" type="bigint">
+						<Comment>Identyfikator rabatu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:26:22" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="DiscountPercentage" null="not null" sortOrder="3" type="decimal">
+						<Comment>Wartość procentowa rabatu</Comment>
+					</Attribute>
 				</Attributes>
 				<History>
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+					<Record When="2021-06-03T19:26:22" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="CustomerID comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="DiscountID comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="DiscountPercentage comment changed" />
 				</History>
 			</Object>
 			<Object Name="dbo.ActiveMenu" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Widok zawierający produkty dostępne do zamówienia.</Comment>
 				<Attributes>
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="1" type="bigint" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalPrice" null="not null" sortOrder="3" type="decimal" />
+					<Attribute commentModified="03.06.2021 19:27:12" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)">
+						<Comment>Nazwa produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:27:12" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="1" type="bigint">
+						<Comment>Identyfikator produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:27:12" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalPrice" null="not null" sortOrder="3" type="decimal">
+						<Comment>Całkowita cena produktu</Comment>
+					</Attribute>
 				</Attributes>
 				<History>
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 3 attributes" />
+					<Record When="2021-06-03T19:27:12" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="Name comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="ProductID comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="TotalPrice comment changed" />
 				</History>
 			</Object>
 			<Object Name="dbo.OrderEntrySummaries" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Widok zawierający podsumowania pozycji w zamówieniach.</Comment>
 				<Attributes>
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="OrderID" null="not null" sortOrder="1" type="bigint" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="2" type="bigint" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Quantity" null="null" sortOrder="3" type="bigint" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalGross" null="null" sortOrder="4" type="decimal" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalNet" null="null" sortOrder="5" type="decimal" />
+					<Attribute commentModified="03.06.2021 19:30:46" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="OrderID" null="not null" sortOrder="1" type="bigint">
+						<Comment>Identyfikator zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:30:46" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="2" type="bigint">
+						<Comment>Identyfikator produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:31:31" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Quantity" null="null" sortOrder="3" type="bigint">
+						<Comment>Ilość zamówionego produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:31:31" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalGross" null="null" sortOrder="4" type="decimal">
+						<Comment>Całkowita cena brutto</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:31:31" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="TotalNet" null="null" sortOrder="5" type="decimal">
+						<Comment>Całkowita cena netto</Comment>
+					</Attribute>
 				</Attributes>
 				<History>
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 5 attributes" />
+					<Record When="2021-06-03T19:31:31" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="OrderID comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="ProductID comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="Quantity comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="TotalGross comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="TotalNet comment changed" />
+				</History>
+			</Object>
+			<Object Name="dbo.OrderSummaries" Created="2021-06-03T17:03:21" CommentModified="2021-06-03T17:03:21" CommentModifiedBy="">
+				<Comment>Widok zawierający podsumowania zamówień.</Comment>
+				<Attributes>
+					<Attribute commentModified="03.06.2021 19:34:41" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="AbsoluteGross" null="null" sortOrder="6" type="decimal">
+						<Comment>Absolutna cena brutto zamówienia (nie uwzględnia rabatów)</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:34:41" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="AbsoluteNet" null="null" sortOrder="7" type="decimal">
+						<Comment>Absolutna cena netto zamówienia (nie uwzględnia rabatów)</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:34:41" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="CustomerID" null="not null" sortOrder="2" type="bigint">
+						<Comment>Identyfikator klienta</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:36:45" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="DiscountPercentage" null="null" sortOrder="8" type="decimal">
+						<Comment>Wartość procentowa rabatu towarzyszącego zamówieniu (NULL jeżeli brak rabatu)</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:32:25" created="2021-06-03T18:07:37" modified="2021-06-03T18:07:37" name="OrderId" null="not null" sortOrder="1" type="bigint">
+						<Comment>Identyfikator zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:34:41" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="PlacementDateTime" null="not null" sortOrder="3" type="datetime">
+						<Comment>Czas złożenia zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:34:41" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="RealizationDateTime" null="not null" sortOrder="4" type="datetime">
+						<Comment>Docelowy czas realizacji zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:36:45" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="TotalGross" null="null" sortOrder="9" type="decimal">
+						<Comment>Cena brutto zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:36:45" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="TotalNet" null="null" sortOrder="10" type="decimal">
+						<Comment>Cena netto zamówienia</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:34:41" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="TotalQuantity" null="null" sortOrder="5" type="bigint">
+						<Comment>Całkowita liczba produktów zawartych w zamówieniu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:36:45" created="2021-06-03T17:03:21" modified="2021-06-03T17:03:21" name="WasInvoiced" null="not null" sortOrder="11" type="bit">
+						<Comment>Flaga informująca czy na zamówienie została wypisana faktura</Comment>
+					</Attribute>
+				</Attributes>
+				<History>
+					<Record When="2021-06-03T17:03:21" Who="Jaro" Description="Loaded" />
+					<Record When="2021-06-03T17:03:21" Who="Jaro" Description="Loaded 11 attributes" />
+					<Record When="2021-06-03T18:07:37" Who="Jaro" Description="Loaded OrderId" />
+					<Record When="2021-06-03T19:33:11" Who="Jaro" Description="Removed OrderID" />
+					<Record When="2021-06-03T19:32:25" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="AbsoluteGross comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="AbsoluteNet comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="CustomerID comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="DiscountPercentage comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="OrderId comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="PlacementDateTime comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="RealizationDateTime comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="TotalGross comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="TotalNet comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="TotalQuantity comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="WasInvoiced comment changed" />
 				</History>
 			</Object>
 			<Object Name="dbo.TaxedProducts" Created="2021-05-30T20:51:26" CommentModified="2021-05-30T20:51:26" CommentModifiedBy="">
+				<Comment>Widok zawierający opodatkowane produkty.</Comment>
 				<Attributes>
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="GrossPrice" null="not null" sortOrder="3" type="decimal" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="NetPrice" null="null" sortOrder="4" type="decimal" />
-					<Attribute created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="1" type="bigint" />
+					<Attribute commentModified="03.06.2021 19:37:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="GrossPrice" null="not null" sortOrder="3" type="decimal">
+						<Comment>Cena brutto produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:37:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="Name" null="not null" sortOrder="2" type="varchar(50)">
+						<Comment>Nazwa produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:37:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="NetPrice" null="null" sortOrder="4" type="decimal">
+						<Comment>Cena netto produktu</Comment>
+					</Attribute>
+					<Attribute commentModified="03.06.2021 19:37:43" created="2021-05-30T20:51:26" modified="2021-05-30T20:51:26" name="ProductID" null="not null" sortOrder="1" type="bigint">
+						<Comment>Identyfikator produktu</Comment>
+					</Attribute>
 				</Attributes>
 				<History>
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded" />
 					<Record When="2021-05-30T20:51:26" Who="Jan" Description="Loaded 4 attributes" />
+					<Record When="2021-06-03T19:37:43" Who="Jaro" Description="Changed object comment" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="GrossPrice comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="Name comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="NetPrice comment changed" />
+					<Record When="2021-06-03T19:40:13" Who="Jaro" Description="ProductID comment changed" />
 				</History>
 			</Object>
 		</Group>
