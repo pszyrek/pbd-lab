@@ -1,1 +1,0 @@
-INSERT INTO Products VALUES ('Osmornica', 500, 1, 1)

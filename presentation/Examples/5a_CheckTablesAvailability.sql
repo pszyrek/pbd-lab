@@ -1,0 +1,1 @@
+SELECT * FROM dbo.get_available_tables_ids('2021.06.08 12:00:00', '2021.06.08 13:00:00')
